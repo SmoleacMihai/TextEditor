@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace TextEditor
 {
-    public partial class Form2 : Form
+    public partial class FindWindow : Form
     {
-        public Form2()
+        public FindWindow()
         {
             InitializeComponent();
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            String textToFind 
         }
     }
 }

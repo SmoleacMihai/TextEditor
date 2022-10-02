@@ -18,11 +18,6 @@ namespace TextEditor
             InitializeComponent();
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             richTextBox1.ResetText();
@@ -51,7 +46,7 @@ namespace TextEditor
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form2 form = new Form2();
+            AboutWindow form = new AboutWindow();
             form.Show();
         }
 
@@ -73,6 +68,74 @@ namespace TextEditor
         private void toolStripLabel1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectAll();
+            richTextBox1.SelectionAlignment = HorizontalAlignment.Center;
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectAll();
+            richTextBox1.SelectionAlignment = HorizontalAlignment.Left;
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectAll();
+            richTextBox1.SelectionAlignment = HorizontalAlignment.Right;
+        }
+
+        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FontDialog dialog = new FontDialog())
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBox1.SelectionFont = dialog.Font;
+                }
+            }
+        }
+
+        private void toolStripLabel2_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            richTextBox1.SelectionColor = colorDialog1.Color;
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            String s = richTextBox1.SelectedText;
+            richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Bold);
+            richTextBox1.SelectedText = s;
+        }
+
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+            String s = richTextBox1.SelectedText;
+            richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Italic);
+            richTextBox1.SelectedText = s;
+        }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+            String s = richTextBox1.SelectedText;
+            richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Underline);
+            richTextBox1.SelectedText = s;
+        }
+
+        private void findToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FindWindow newFind = new FindWindow();
+            newFind.Show();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
