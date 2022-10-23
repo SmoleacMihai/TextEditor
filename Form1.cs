@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -133,14 +135,38 @@ namespace TextEditor
             newFind.Show();
         }
 
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
+        private void textToReplace_Click(object sender, EventArgs e)
+        {
+            ReplaceAll(richTextBox1, findText.Text, replaceText.Text);
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        private void findText_TextChanged(object sender, EventArgs e)
         {
+            Regex regex = new Regex(findText.Text);
+            MatchCollection matches = regex.Matches(richTextBox1.Text);
+            richTextBox1.SelectAll();
+            richTextBox1.SelectionBackColor = richTextBox1.BackColor;
+            foreach (Match match in matches)
+            {
+                richTextBox1.Select(match.Index, match.Length);
+                richTextBox1.SelectionBackColor = Color.Yellow;
+            }
+        }
 
+        public void ReplaceAll(RichTextBox myRtb, string word, string replacement)
+        {
+            int i = 0;
+            int n = 0;
+            int a = replacement.Length - word.Length;
+            foreach (Match m in Regex.Matches(myRtb.Text, word))
+            {
+                myRtb.Select(m.Index + i, word.Length);
+                i += a;
+                myRtb.SelectedText = replacement;
+                n++;
+            }
+            MessageBox.Show("Replaced " + n + " matches!");
         }
     }
 }
