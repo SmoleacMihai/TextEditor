@@ -22,7 +22,8 @@ namespace TextEditor
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.ResetText();
+            Form1 newForm = new Form1();
+            newForm.Show();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
